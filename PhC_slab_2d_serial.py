@@ -44,7 +44,7 @@ def main():
     start = time.time()
     omegaSpace = np.linspace(0.25, 0.6, 351)
     RSpace = np.array(list(map(R_PhC_slab, omegaSpace)))
-    data_result = f'Wavelength (um)\tT\n'
+    data_result = 'Wavelength (um)\tT\n'
     for omega, R in zip(omegaSpace, RSpace):
         data_result_append = f'{omega:.3f}\t{R:.6f}\n'
         data_result += data_result_append

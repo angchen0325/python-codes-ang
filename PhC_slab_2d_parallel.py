@@ -43,14 +43,14 @@ def R_PhC_slab(omega):
 
 def main():
     start = time.time()
-    pool = mp.Pool(processes=6)
+    pool = mp.Pool(processes=10)
     omegaSpace = np.linspace(0.25, 0.6, 351)
     RSpace = pool.map(R_PhC_slab, omegaSpace)
     data_result = f'Wavelength (um)\tT\n'
     for omega, R in zip(omegaSpace, RSpace):
         data_result_append = f'{omega:.3f}\t{R:.6f}\n'
         data_result += data_result_append
-    with open('PhC_T_py_parallel.txt', 'w') as f:
+    with open('./data/PhC_T_py_parallel.txt', 'w') as f:
         f.write(data_result)
     f.close()
     end = time.time()

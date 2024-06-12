@@ -50,7 +50,7 @@ def main():
     for omega, R in zip(omegaSpace, RSpace):
         data_result_append = f'{omega:.3f}\t{R:.6f}\n'
         data_result += data_result_append
-    with open('./data/PhC_T_py_parallel.txt', 'w') as f:
+    with open('./data/PhC_T_py_mp.txt', 'w') as f:
         f.write(data_result)
     f.close()
     end = time.time()

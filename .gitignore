@@ -1,3 +1,7 @@
+# This file tells git to ignore certain files or directories when committing changes.
 *.txt
 .DS_Store
-model3_sio2Grating_rectangle.lua
+
+# Ignore data directory
+data/
+lua-files/

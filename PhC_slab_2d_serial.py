@@ -44,13 +44,13 @@ def main():
     start = time.time()
     omegaSpace = np.linspace(0.25, 0.6, 351)
     RSpace = np.array(list(map(R_PhC_slab, omegaSpace)))
-    data_result = 'Wavelength (um)\tT\n'
-    for omega, R in zip(omegaSpace, RSpace):
-        data_result_append = f'{omega:.3f}\t{R:.6f}\n'
-        data_result += data_result_append
-    with open('./data/PhC_T_py_serial.txt', 'w') as f:
-        f.write(data_result)
-    f.close()
+    # data_result = 'Wavelength (um)\tT\n'
+    # for omega, R in zip(omegaSpace, RSpace):
+    #     data_result_append = f'{omega:.3f}\t{R:.6f}\n'
+    #     data_result += data_result_append
+    # with open('./data/PhC_T_py_serial.txt', 'w') as f:
+    #     f.write(data_result)
+    # f.close()
 
     end = time.time()
     print('Elapsed time is %.4f seconds.' % (end-start))
@@ -58,7 +58,7 @@ def main():
     fig, ax = plt.subplots()
     ax.plot(omegaSpace, RSpace, color='red', alpha=0.5)
     ax.set_xlim([omegaSpace.min(), omegaSpace.max()]), ax.set_ylim([0, 1])
-    ax.set_xlabel('Frequency (2$\pi c/a$)'), ax.set_ylabel('Transmission')
+    ax.set_xlabel(r'Frequency (2$\pi c/a$)'), ax.set_ylabel('Transmission')
     ax.grid(linestyle='--')
     fig.tight_layout()
     plt.show()

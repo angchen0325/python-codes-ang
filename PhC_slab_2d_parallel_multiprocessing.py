@@ -1,9 +1,12 @@
 # Import libraries
 import time
 import multiprocessing as mp
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 import S4
+
 plt.rcParams["font.family"] = "Helvetica"
 
 
@@ -43,26 +46,27 @@ def R_PhC_slab(omega):
 
 def main():
     start = time.time()
-    pool = mp.Pool(processes=10)
-    omegaSpace = np.linspace(0.25, 0.6, 351)
+    pool = mp.Pool(processes=os.cpu_count())
+    omegaSpace = np.linspace(0.25, 0.6, num=351)
     RSpace = pool.map(R_PhC_slab, omegaSpace)
-    data_result = 'Wavelength (um)\tT\n'
-    for omega, R in zip(omegaSpace, RSpace):
-        data_result_append = f'{omega:.3f}\t{R:.6f}\n'
-        data_result += data_result_append
-    with open('./data/PhC_T_py_mp.txt', 'w') as f:
-        f.write(data_result)
-    f.close()
+    # data_result = 'Wavelength (um)\tT\n'
+    # for omega, R in zip(omegaSpace, RSpace):
+    #     data_result_append = f'{omega:.3f}\t{R:.6f}\n'
+    #     data_result += data_result_append
+    # with open('./data/PhC_T_py_mp.txt', 'w') as f:
+    #     f.write(data_result)
+    # f.close()
     end = time.time()
     pool.close()
     pool.join()
     RSpace = np.array(RSpace)
+    # print(f"Rspace: {RSpace}")
     print(f'Elapsed time is {(end-start):.4f} seconds.')
 
     fig, ax = plt.subplots()
     ax.plot(omegaSpace, RSpace, color='red', alpha=0.5)
     ax.set_xlim([omegaSpace.min(), omegaSpace.max()]), ax.set_ylim([0, 1])
-    ax.set_xlabel('Frequency (2$\pi c/a$)'), ax.set_ylabel('Transmission')
+    ax.set_xlabel(r'Frequency (2$\pi c/a$)'), ax.set_ylabel('Transmission')
     ax.grid(linestyle='--')
     fig.tight_layout()
     plt.show()

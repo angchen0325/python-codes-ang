@@ -1,7 +1,9 @@
 # This file tells git to ignore certain files or directories when committing changes.
 *.txt
 .DS_Store
+*.pyc
 
 # Ignore data directory
 data/
 lua-files/
+
